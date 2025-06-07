@@ -14,20 +14,29 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column({ isPrimary: true })
   declare id: number
 
-  @column()
-  declare fullName: string | null
+  @column({ columnName: 'nombre_completo' })
+  declare nombreCompleto: string
 
   @column()
-  declare email: string
+  declare especialidad: string
 
-  @column({ serializeAs: null })
-  declare password: string
+  @column({ columnName: 'registro_profesional' })
+  declare registroProfesional: string
+
+  @column()
+  declare diasDisponibles: any
+
+  @column()
+  declare activo: boolean
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+
+  @column.dateTime({ columnName: 'deleted_at' })
+  declare deletedAt: DateTime | null
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
 }
